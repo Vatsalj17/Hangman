@@ -181,17 +181,20 @@ void game()
         intro(); // Display the intro
 
         print_hangman(chances);
+
+        if (won(nword))
+        {
+            print(nword);
+            printf("\nCongratulations! You won");
+            break;
+        }
+
         if (!confirm)
             print(nword);
         move(word, nword, &confirm, &chances);
         if (chances >= 7)
             break;
         confirm = 0;
-        if (won(nword))
-        {
-            printf("\nCongratulations! You won");
-            break;
-        }
     }
 }
 
