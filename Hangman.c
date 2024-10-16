@@ -71,7 +71,7 @@ void print_hangman(int stage)
 void word_finder(char *word)
 {
     srand(time(0));
-    int actual_word = (rand() % 508) + 1;
+    int actual_word = (rand() % 583) + 1;
 
     FILE *wordbook;
     wordbook = fopen("words.txt", "r");
