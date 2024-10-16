@@ -8,3 +8,13 @@ This is a command-line implementation of the classic Hangman game, where players
 - ASCII art representation of the hangman.
 - Simple and intuitive command-line interface.
 - Game instructions and rules provided at the start.
+
+### ASCII Art
+```bash
+         +---+
+         |   |
+         O   |
+        /|\  |
+        / \  |
+             |
+        =========
