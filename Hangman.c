@@ -63,7 +63,8 @@ void print_hangman(int stage)
         "/ \\  |\n"
         "     |\n"
         "=========\n"};
-    printf("%s", hangman[stage]);
+    if (stage)
+        printf("%s", hangman[stage - 1]);
 }
 
 // Function to select a random english word from 'Words.txt' file
@@ -84,6 +85,16 @@ void word_finder(char *word)
         current_word++;
     }
     fclose(wordbook);
+}
+
+// Function to print the finding word
+void print(char *the_word)
+{
+    for (int i = 0; the_word[i] != '\0'; i++)
+    {
+        printf("%c ", the_word[i]);
+    }
+    printf("\n");
 }
 
 // Function to display the game introduction and rules to the player
@@ -120,15 +131,17 @@ void move(char *word, char *blank, int *found, int *wrong)
     // If the character is not found in the word
     if (!check)
     {
-        print_hangman(*wrong);
+        // print_hangman(*wrong);
+        printf("Not found\n");
         (*wrong)++;
         (*found)++;
-        printf("Not found\n");
 
         // Check if all attempts are used
         if ((*wrong) == 7)
         {
+            system("cls");
             printf("!! GAME OVER !!\n");
+            print_hangman(7);
             printf("The word was %s", word);
         }
     }
@@ -161,21 +174,24 @@ void game()
     }
     nword[strlen(word) - 1] = '\0'; // Null-terminate the blank word
 
-    intro(); // Display the intro
-
     while (1)
     {
+        system("cls"); // Clear the screen
+
+        intro(); // Display the intro
+
+        print_hangman(chances);
+        if (!confirm)
+            print(nword);
+        move(word, nword, &confirm, &chances);
         if (chances >= 7)
             break;
-        if (!confirm)
-            puts(nword);
         confirm = 0;
         if (won(nword))
         {
-            printf("Congratulations! You won");
+            printf("\nCongratulations! You won");
             break;
         }
-        move(word, nword, &confirm, &chances);
     }
 }
 
